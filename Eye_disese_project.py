@@ -92,3 +92,59 @@ y_pred = clf.predict(X_test)
 print("\nSVM Classification Report:")
 print(classification_report(y_test, y_pred, target_names=label_names))
 print(f"SVM Accuracy: {accuracy_score(y_test, y_pred) * 100:.2f}%")
+   
+
+
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+import numpy as np
+import os
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import classification_report, accuracy_score
+
+output_directory = "/content/drive/MyDrive/eye classification dataset/output_eye_disease"
+
+X, y = [], []
+label_names = []
+valid_labels = []
+
+for idx, file_name in enumerate(os.listdir(output_directory)):
+    if file_name.endswith('.npy'):
+        label = file_name.replace('_features.npy', '')
+        path = os.path.join(output_directory, file_name)
+        features = np.load(path)
+
+        # Check for empty array
+        if features.size == 0:
+            print(f"⚠️ Skipping empty features in: {file_name}")
+            continue
+
+        # Reshape if only 1 image
+        if features.ndim == 1:
+            features = features.reshape(1, -1)
+
+        X.append(features)
+        y.extend([len(valid_labels)] * features.shape[0])
+        valid_labels.append(label)  # Only add label if data is valid
+
+# Convert and check
+if not X:
+    raise ValueError("No valid feature data loaded. Please check your .npy files.")
+
+X = np.concatenate(X, axis=0)
+y = np.array(y)
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train SVM
+clf = SVC(kernel='linear')
+clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+
+print("\n✅ SVM Classification Report:")
+print(classification_report(y_test, y_pred, target_names=valid_labels))
+print(f"✅ SVM Accuracy: {accuracy_score(y_test, y_pred) * 100:.2f}%")
