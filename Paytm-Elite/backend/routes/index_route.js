@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/hel",(req,res) => {
-    res.send("user route is activated");
+    res.send("index route check is activated");
 
 })
 
