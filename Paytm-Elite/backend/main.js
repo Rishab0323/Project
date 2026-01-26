@@ -3,11 +3,14 @@ const app = express();
 const mongoose = require("mongoose");
 const mainRouter = require("./routes/index_route");
 const cors = require("cors");
+const user1 = require("./routes/user");
+// const user = require("./database/db");
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/v1",mainRouter);
+app.use("api/user",user1);
+app.use("/api/paytm",mainRouter);
 
 require('dotenv').config();
 

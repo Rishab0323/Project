@@ -5,7 +5,7 @@ const authMiddleware = (req,res,next) => {
     const authHeader = req.headers.authorization;
 
     if(!authHeader || !authHeader.starsWith('Bearer')){
-        return res.status(403).json({msg : "token not in bearer form"});
+        return res.status(403).json({msg : "token not in bearer form / invalid req"});
     }
 
     const token = authHeader.split(' ')[1];
@@ -16,10 +16,13 @@ const authMiddleware = (req,res,next) => {
             req.userId = decoded.userId;
             next();
         } else{
-            return res.status(403).json({msg :"auth check 2 fail"});
+            return res.status(403).json({msg :"auth checkpoint 2 fail"});
         }
     }
     catch(err){
         return res.status(403).json({msg : err});
     }
 }
+
+module.exports = authMiddleware;
+
