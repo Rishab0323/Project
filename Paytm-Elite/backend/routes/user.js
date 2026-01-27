@@ -4,6 +4,7 @@ const JWT_SECRET = require("../config");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 const User = require("../database/db");
+const {authMiddleware} = require("../middleware");
 
 const signupData = zod.object( {
     username : zod.string().email(),
@@ -89,4 +90,52 @@ router.get("/testing",(req,res) => {
     res.send('databbase is worling')
 })
 
+const updateBody = zod.body({
+    password : zod.string().option(),
+    firstname : zod.string().option(),
+    lastname : zod.string().option(),
+    })
+
+router.put("/",authMiddleware, async (req,res) => {
+    const {success} = updateBody.safeParse(req.body)
+    if(!success){
+    res.status(411).json({
+    msg : "error while updating information"
+    })
+    }
+
+    await User.updateOne(req.body , {
+        id : req.userId
+    })
+
+    res.json({ msg : " updated successfully"});
+
+})
+
+
+router.get("/bulk", async (req,res) => {
+    const filter = req.body.filter || " ";
+
+    const users = await User.findOne({
+        $or: [{
+            firstname: {
+                "$regex": filter
+            }
+        },{ lastname: {
+                "$regex": filter
+            }
+        }]
+})
+
+    res.json({
+    user : users.map(user => ({
+        username: user.username,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        _id : user.user_id
+
+        }))
+    })
+
+})
 module.exports = router;
