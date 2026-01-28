@@ -86,18 +86,20 @@ router.post("/signin", async(req,res) => {
 
 })
 
+//route to test server works or not
 router.get("/testing",(req,res) => {
-    res.send('databbase is worling')
+    res.send('databbase is working')
 })
 
-const updateBody = zod.body({
-    password : zod.string().option(),
-    firstname : zod.string().option(),
-    lastname : zod.string().option(),
+const updateBody = zod.object({
+    password : zod.string(),
+    firstname : zod.string(),
+    lastname : zod.string(),
     })
 
 router.put("/",authMiddleware, async (req,res) => {
     const {success} = updateBody.safeParse(req.body)
+
     if(!success){
     res.status(411).json({
     msg : "error while updating information"
