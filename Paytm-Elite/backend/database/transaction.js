@@ -10,3 +10,4 @@ const transferFund = async(fromAccountId,toAccountId,amount) => {
 }
 
 transferFund('fromAccountId','toAccountId',100);
+ 

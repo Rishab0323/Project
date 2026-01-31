@@ -10,7 +10,7 @@ const UserSchema =  mongoose.Schema({
     lastName : String
 });
 
-const accountSchema = model.Schema({
+const accountSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

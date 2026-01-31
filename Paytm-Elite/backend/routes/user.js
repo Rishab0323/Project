@@ -13,9 +13,10 @@ const signupData = zod.object( {
     lastname : zod.string()
 })
 
-router.get("/signup", async (req,res) => {
-    const {successData} = signupData.safeParse(req.body)
-    if(!successData){
+router.post("/signup", async (req,res) => {
+    try{
+    const {success} = signupData.safeParse(req.body)
+    if(!success){
         return res.status(411).json({message : "Email already exist / invalid input"});
     }
 
@@ -35,6 +36,12 @@ router.get("/signup", async (req,res) => {
     })
 
     const userId = user._id;
+
+    await Account.create({
+        userId,
+        balance: 1 + Math.random() + 100
+    })
+
     const token = jwt.sign({
         userId 
     },JWT_SECRET);
@@ -43,6 +50,14 @@ router.get("/signup", async (req,res) => {
         message : "user created succesfully",
         token : token
     })
+    }
+
+    catch(err){
+        console.log(err);
+        res.status(404).json({
+            err
+        })
+    }
 
 })
 
