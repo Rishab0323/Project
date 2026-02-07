@@ -2,6 +2,7 @@ import { Heading } from "../Component/heading";
 import { Subheading } from "../Component/subheading";
 import { InputBox } from "../Component/InputBox";
 import { Button } from "../Component/button";
+import { BottomWarning } from "../Component/buttomWarning";
 
 const Signup = () => {
     return (
@@ -15,6 +16,9 @@ const Signup = () => {
                 <InputBox placeholder="john@4gmail.com" label={"Email"}/>
                 <InputBox placeholder="12344#*45" label={"Password"}/>
                 <Button label={"Signup"} />
+                <div>
+                    <BottomWarning label={"Signup"} />
+                </div>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
 export function Button({label}){
-    return (<button  type="button"  className="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  px-2 py-1">
+    return (<button  type="button"  className="w-full bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-sky-600 focus:outline-none">
         {label}</button>
 )}
