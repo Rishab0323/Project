@@ -17,7 +17,7 @@ const Signup = () => {
                 <InputBox placeholder="12344#*45" label={"Password"}/>
                 <Button label={"Signup"} />
                 <div>
-                    <BottomWarning label={"Signup"} />
+                    <BottomWarning label={"Already have an account ?"} label2={"Login"} />
                 </div>
             </div>
         </div>
