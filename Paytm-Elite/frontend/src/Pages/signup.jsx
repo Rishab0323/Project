@@ -4,6 +4,7 @@ import { InputBox } from "../Component/InputBox";
 import { Button } from "../Component/button";
 import { BottomWarning } from "../Component/buttomWarning";
 import { useState } from "react";
+import axios from "axios";
 
 const Signup = () => {
 
@@ -32,14 +33,20 @@ const Signup = () => {
                 }}  placeholder="12344#*45" label={"Password"}/>
     
                 <div>
-                    <Button onClick={() => {
-                        axios.get("http://localhost:2000/api/user/signup",{
-                            firstName,
-                            lastName,
+                    <Button onClick={async() => {
+                        try{
+                        const res = await axios.post("http://localhost:2000/api/user/signup",{
+                            firstname:firstName,
+                            lastname :lastName,
                             username,
                             password
                         });
-                    }} label={"Signup"} />
+                        console.log("success data",res);
+                        }catch(err){
+                            console.error("signup error ",err);
+                         }
+                    }} 
+                    label={"Signup"} />
                 </div>
                 <BottomWarning label={"Already have an account ?"} label2={"Login"} />
             </div>
