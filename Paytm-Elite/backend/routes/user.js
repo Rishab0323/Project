@@ -7,7 +7,7 @@ const {User ,Account} = require("../database/db");
 const {authMiddleware} = require("../middleware");
 
 const signupData = zod.object( {
-    username : zod.string().email(),
+    username : zod.string(),
     password : zod.string().min(6),
     firstname : zod.string(),
     lastname : zod.string()
@@ -50,6 +50,7 @@ router.post("/signup", async (req,res) => {
         message : "user created succesfully",
         token : token
     })
+    console.log("result recive",user)
     }
 
     catch(err){
