@@ -41,6 +41,8 @@ const Signup = () => {
                             username,
                             password
                         });
+                        localStorage.setItem("token",res.data.token)
+                        localStorage.delete("token")
                         console.log("success data",res);
                         }catch(err){
                             console.error("signup error ",err);
