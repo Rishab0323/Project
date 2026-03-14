@@ -1,6 +1,6 @@
 function Profile() {
   return (
-    <section className="grid grid-cols-3 items-start mt-16 gap-6">
+    <section id="home" className="grid grid-cols-1 md:grid-cols-3 items-start mt-16 gap-6">
 
       {/* LEFT COLUMN */}
       <div>
@@ -13,7 +13,7 @@ function Profile() {
 <div className="flex flex-col items-center">
 
   <img
-    src="https://i.pravatar.cc/300"
+    src="https://media.licdn.com/dms/image/v2/D5603AQF7W9uAzMVcPQ/profile-displayphoto-scale_200_200/B56ZjdX_31G4AY-/0/1756060715061?e=2147483647&v=beta&t=z-MmH2mdPFx_HpC3KINCC2HJ5MdHcDo5L9GUyRZAA9g"
     className="rounded-2xl"
   />
 

@@ -1,6 +1,6 @@
 function Projects() {
   return (
-    <section className="mt-20">
+    <section id="projects" className="mt-20">
 
       {/* SECTION TITLE */}
       <h2 className="text-white text-3xl font-bold mb-10">
@@ -8,7 +8,7 @@ function Projects() {
       </h2>
 
       {/* PROJECT GRID */}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         {/* PROJECT CARD */}
         <div className="bg-[#111827] rounded-2xl p-6">
